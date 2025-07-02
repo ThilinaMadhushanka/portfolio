@@ -36,6 +36,7 @@ body {
   margin-left: 2rem;
   background: linear-gradient(90deg, #a78bfa, #f472b6);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: 2px;
 }
@@ -424,8 +425,8 @@ body {
   justify-content: center;
 }
 .education-image-wrapper {
-  width: 140px;
-  height: 140px;
+  width: 300px;
+  height: 300px;
   border-radius: 1.5rem;
   overflow: hidden;
   border: 2px solid #a78bfa33;
@@ -561,11 +562,12 @@ body {
   transform: translateY(0);
 }
 .achievements-card {
-  background: linear-gradient(135deg, #a78bfa22 0%, #f472b622 100%);
-  border: 1px solid #fff2;
+  background: linear-gradient(90deg, #a78bfa22 0%, #f472b622 100%);
+  border: 2px solid #a78bfa;
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px #a78bfa22;
+  box-shadow: 0 4px 24px #a78bfa33;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 .achievements-header {
   display: flex;
@@ -585,21 +587,27 @@ body {
   justify-content: space-between;
 }
 .achievements-item-title {
-  font-size: 1.1rem;
+  background: linear-gradient(90deg, #a78bfa, #f472b6, #facc15, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: bold;
-  color: #a78bfa;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
 }
 .achievements-year {
-  background: #a78bfa33;
-  color: #a78bfa;
+  background: linear-gradient(90deg, #f472b6, #facc15);
+  color: #18181b;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   font-size: 0.95rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px #f472b655;
+  border: none;
 }
 .achievements-desc {
-  color: #cbd5e1;
+  color: #a78bfa;
+  font-weight: 500;
   margin-top: 0.5rem;
-  font-size: 1rem;
 }
 
 /* Certifications Section */
@@ -627,11 +635,12 @@ body {
   transform: translateY(0);
 }
 .certifications-card {
-  background: linear-gradient(135deg, #a78bfa22 0%, #f472b622 100%);
-  border: 1px solid #fff2;
+  background: linear-gradient(90deg, #f472b622 0%, #a78bfa22 100%);
+  border: 2px solid #f472b6;
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px #a78bfa22;
+  box-shadow: 0 4px 24px #f472b633;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 .certifications-header {
   display: flex;
@@ -651,25 +660,28 @@ body {
   justify-content: space-between;
 }
 .certifications-item-title {
-  font-size: 1.1rem;
+  background: linear-gradient(90deg, #f472b6, #a78bfa, #facc15, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: bold;
-  color: #a78bfa;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
 }
 .certifications-year {
-  background: #a78bfa33;
-  color: #a78bfa;
+  background: linear-gradient(90deg, #a78bfa, #38bdf8);
+  color: #18181b;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   font-size: 0.95rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px #a78bfa55;
+  border: none;
 }
-.certifications-issuer {
-  color: #cbd5e1;
-  margin-top: 0.5rem;
-  font-size: 1rem;
-}
+.certifications-issuer,
 .certifications-id {
-  color: #94a3b8;
-  font-size: 0.95rem;
+  color: #f472b6;
+  font-weight: 500;
+  margin-top: 0.25rem;
 }
 
 /* Projects Section */
@@ -688,8 +700,8 @@ body {
   gap: 2rem;
 }
 .projects-item {
-  opacity: 0;
-  transform: translateY(40px);
+  opacity: 1;
+  transform: none;
   transition: all 1s;
   cursor: pointer;
 }

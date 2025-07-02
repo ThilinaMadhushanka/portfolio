@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe, Award, BookOpen, GraduationCap, Terminal, Braces, BarChart3, Network, MapPin, Calendar, Eye, Star } from 'lucide-react';
 import './Portfolio.css';
 import aboutImg from './376728350_1292994751351301_1136127884073783092_n.png';
+import video from '../../public/202507010006.mp4';
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -270,7 +271,7 @@ const Portfolio = () => {
       description: 'Custom neural network implementation for image classification built from scratch using NumPy. Features forward/backward propagation, SGD with momentum, dropout regularization and comprehensive performance visualization.',
       fullDescription: 'A comprehensive deep learning project implementing neural networks from scratch with custom forward/backward propagation, optimization algorithms, and performance visualization.',
       tech: ['Python', 'NumPy', 'Pandas', 'Matplotlib', 'Scikit-learn'],
-      image: 'https://images.unsplash.com/photo-1555949950473-47ba0277781c?w=500&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=500&h=300&fit=crop',
       github: 'https://github.com/ThilinaMadhushanka/Deep_learning_project',
       live: 'https://www.linkedin.com/feed/update/urn:li:activity:7322572128115904512/',
       status: 'Completed'
@@ -403,7 +404,18 @@ const Portfolio = () => {
     }
   ], []);
 
- 
+  useEffect(() => {
+    setIsVisible({
+      home: true,
+      about: true,
+      education: true,
+      skills: true,
+      achievements: true,
+      projects: true,
+      certifications: true,
+      contact: true,
+    });
+  }, []);
 
   // --- Splash Screen ---
   const SplashScreen = () => (
@@ -537,9 +549,9 @@ const Portfolio = () => {
           {/* Video at the bottom */}
           <div className="home-video-col" style={{ marginTop: '2rem' }}>
             <video
-              width="80%"
+              width="100%"
               style={{ maxWidth: 400, borderRadius: 16, boxShadow: '0 8px 32px #a78bfa55' }}
-              src="/202507010006.mp4"
+              src={video}
               controls
             />
           </div>
