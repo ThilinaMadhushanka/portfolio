@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add these animation definitions */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.7s ease-out forwards;
+}
+
+.animate-fade-out {
+  animation: fade-out 0.7s ease-out forwards;
+}
+
+/* Existing animations below */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes gradient-bg {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.animate-gradient-bg {
+  background: linear-gradient(270deg, #7c3aed 0%, #ec4899 50%, #0f172a 100%);
+  background-size: 400% 400%;
+  animation: gradient-bg 15s ease infinite;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+/* Add these for splash screen animations */
+.fade-in {
+  animation: fadeIn 0.7s;
+}
+.fade-out {
+  animation: fadeIn 0.7s reverse;
+}
+.fade-leave {
+  animation: fadeOut 0.7s forwards;
+}
