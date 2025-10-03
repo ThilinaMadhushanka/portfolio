@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Add these animation definitions */
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -21,7 +20,6 @@
   animation: fade-out 0.7s ease-out forwards;
 }
 
-/* Existing animations below */
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -53,7 +51,6 @@
   opacity: 0.2;
 }
 
-/* Add these for splash screen animations */
 .fade-in {
   animation: fadeIn 0.7s;
 }

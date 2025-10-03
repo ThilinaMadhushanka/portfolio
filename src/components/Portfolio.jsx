@@ -3,6 +3,51 @@ import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Palette, Database,
 import './Portfolio.css';
 import aboutImg from './376728350_1292994751351301_1136127884073783092_n.png';
 import video from '../../public/202507010006.mp4';
+import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles';
+import ComputersCanvas from './ComputersCanvas.jsx';
+import ErrorBoundary from './ErrorBoundary.jsx';
+
+const HeroParticles = () => {
+  const particlesInit = async (main) => {
+    await loadFull(main);
+  };
+  return (
+    <Particles
+      id="tsparticles"
+      init={particlesInit}
+      options={{
+        background: { color: 'transparent' },
+        fpsLimit: 60,
+        particles: {
+          number: { value: 70 },
+          move: { enable: true, speed: 1 },
+          opacity: { value: 0.3 },
+          size: { value: { min: 1, max: 3 } },
+          links: { enable: true, color: '#888', opacity: 0.4 },
+        },
+        detectRetina: true,
+      }}
+    />
+  );
+};
+
+// Intersection Observer to toggle section-visible
+function useSectionReveal() {
+  useEffect(() => {
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('section-visible');
+        });
+      },
+      { threshold: 0.2 }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+}
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -106,9 +151,9 @@ const Portfolio = () => {
 
   const stats = useMemo(() => [
     { label: "Projects Completed", value: "20+" },
-    { label: "Years Experience", value: "2+" },
+    { label: "Years Experience", value: "0+" },
     { label: "GitHub Stars", value: "50+" },
-    { label: "Profile Views", value: "1K+" }
+    { label: "Profile Views", value: "100+" }
   ], []);
 
   const achievements = useMemo(() => [
@@ -138,54 +183,63 @@ const Portfolio = () => {
     }
   ], []);
 
-  const skillCategories = useMemo(() => [
+  const skillBadgeGroups = useMemo(() => ([
     {
       name: 'Programming Languages',
-      icon: <Terminal size={24} />,
-      skills: [
-        { name: 'Java', level: 90, icon: <Code size={20} /> },
-        { name: 'Python', level: 95, icon: <Code size={20} /> },
-        { name: 'JavaScript', level: 85, icon: <Code size={20} /> },
-        { name: 'C++', level: 80, icon: <Code size={20} /> },
-        { name: 'Go', level: 70, icon: <Code size={20} /> },
-        { name: 'PHP', level: 75, icon: <Code size={20} /> },
-        { name: 'SQL', level: 85, icon: <Database size={20} /> }
+      items: [
+        { label: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+        { label: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+        { label: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
+        { label: 'SQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+        { label: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+        { label: 'Go', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' },
+        { label: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+        { label: 'MATLAB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg' },
+        { label: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
       ]
     },
     {
-      name: 'Frontend Technologies',
-      icon: <Globe size={24} />,
-      skills: [
-        { name: 'React.js', level: 90, icon: <Globe size={20} /> },
-        { name: 'HTML/CSS', level: 95, icon: <Code size={20} /> },
-        { name: 'Bootstrap', level: 80, icon: <Palette size={20} /> },
-        { name: 'AngularJS', level: 70, icon: <Braces size={20} /> }
+      name: 'Frameworks & Libraries',
+      items: [
+        { label: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+        { label: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+        { label: 'Express.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+        { label: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
+        { label: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg' },
+        { label: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg' },
+        { label: 'Streamlit', icon: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/streamlit.svg' },
       ]
     },
     {
-      name: 'Backend & Databases',
-      icon: <Database size={24} />,
-      skills: [
-        { name: 'Spring Boot', level: 85, icon: <Braces size={20} /> },
-        { name: 'Node.js', level: 80, icon: <Braces size={20} /> },
-        { name: 'FastAPI', level: 75, icon: <Braces size={20} /> },
-        { name: 'MySQL', level: 85, icon: <Database size={20} /> },
-        { name: 'MongoDB', level: 80, icon: <Database size={20} /> },
-        { name: 'PostgreSQL', level: 75, icon: <Database size={20} /> }
+      name: 'Developer Tools',
+      items: [
+        { label: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+        { label: 'MATLAB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg' },
+        { label: 'VS Code', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
+        { label: 'Cursor', icon: 'https://raw.githubusercontent.com/cursor-ventures/brand/main/logo.svg' },
+        { label: 'Postman', icon: 'https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg' },
+        { label: 'IntelliJ', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg' },
       ]
     },
     {
-      name: 'AI & Machine Learning',
-      icon: <BarChart3 size={24} />,
-      skills: [
-        { name: 'TensorFlow', level: 80, icon: <BarChart3 size={20} /> },
-        { name: 'PyTorch', level: 75, icon: <BarChart3 size={20} /> },
-        { name: 'Scikit-learn', level: 85, icon: <BarChart3 size={20} /> },
-        { name: 'OpenAI API', level: 90, icon: <BarChart3 size={20} /> },
-        { name: 'LangGraph', level: 70, icon: <Network size={20} /> }
+      name: 'Databases',
+      items: [
+        { label: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+        { label: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+        { label: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+      ]
+    },
+    {
+      name: 'Other',
+      items: [
+        { label: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
+        { label: 'Jira', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg' },
+        { label: 'DSA', icon: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/leetcode.svg' },
+        { label: 'OOP', icon: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/java.svg' },
+        { label: 'REST APIs', icon: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/openapi.svg' },
       ]
     }
-  ], []);
+  ]), []);
 
   const projects = useMemo(() => [
     {
@@ -342,6 +396,41 @@ const Portfolio = () => {
       live: '#',
       status: 'Completed'
     }
+  ,
+    // New projects added per user request
+    {
+      id: 15,
+      title: 'Mobile Water Delivery & Hostel Services',
+      description: 'Cross-platform app for water delivery and hostel services built with React Native (Expo) and Firebase. Implements auth, profile, product browsing, cart & checkout, onboarding and validations.',
+      fullDescription: 'Developed a cross-platform React Native (Expo) application integrated with Firebase Auth and Firestore for real-time data. Implemented user authentication, profile management, product listing, cart and checkout flows. Focused on polished UX with onboarding, validation, and mobile-first design.',
+      tech: ['React Native (Expo)', 'Firebase Auth', 'Firestore', 'React Navigation', 'React Native Paper'],
+      image: 'https://img.waterworld.com/files/base/ebm/ww/image/2024/03/65e724a21f04ab001e1d8534-dreamstime_xl_32360015.png?auto=format,compress&fit=fill&fill=blur&q=45&w=640&width=640',
+      github: 'https://github.com/ThilinaMadhushanka/MyApp',
+      live: '#',
+      status: 'Completed'
+    },
+    {
+      id: 16,
+      title: 'Full‑stack CRUD app (MERN)',
+      description: 'Responsive MERN application with full CRUD for product management, client-side state handling, and robust UI/UX built with Chakra UI.',
+      fullDescription: 'Built a full-stack MERN application with React + Chakra UI on the frontend and Node/Express + MongoDB on the backend. Implemented product CRUD operations, client state using Zustand, form validation, and toast notifications for a smooth UX.',
+      tech: ['React', 'Chakra UI', 'Node.js', 'Express', 'MongoDB', 'Zustand'],
+      image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&h=480&fit=crop',
+      github: 'https://github.com/ThilinaMadhushanka/mern_project',
+      live: 'https://mern-project-8qtt.onrender.com/',
+      status: 'Completed'
+    },
+    {
+      id: 17,
+      title: 'Weather Dashboard (City Forecasts)',
+      description: 'Responsive weather dashboard using OpenWeather API with Auth0, searchable city list, client-side caching, and a mobile-friendly Material UI layout.',
+      fullDescription: 'A responsive weather dashboard integrating OpenWeatherMap API to fetch and display city forecasts. Features Auth0 authentication, searchable city lists, client-side caching to reduce API calls, and a mobile-first design using Material UI.',
+      tech: ['React (Vite)', 'Material UI', 'Auth0', 'OpenWeatherMap API'],
+      image: 'https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=800&h=480&fit=crop',
+      github: 'https://github.com/ThilinaMadhushanka/weather-app',
+      live: '#',
+      status: 'Completed'
+    }
   ], []);
 
   const certifications = useMemo(() => [
@@ -392,7 +481,7 @@ const Portfolio = () => {
       Results: 'ABB',
       description: 'Focused on Mathematics, Physics and Chemistry with distinction in Mathematics.',
       coursework: ['Combined Mathematics', 'Physics', 'Chemistry'],
-      image: 'https://gankandacc.schweb.lk/images/Untitled_design_1.jpg'
+      image: 'https://i.ytimg.com/vi/ihJHReW3ZkA/maxresdefault.jpg'
     },
     {
       degree: 'Ordinary Level (O/L)',
@@ -416,6 +505,8 @@ const Portfolio = () => {
       contact: true,
     });
   }, []);
+
+  useSectionReveal();
 
   // --- Splash Screen ---
   const SplashScreen = () => (
@@ -529,6 +620,7 @@ const Portfolio = () => {
         </div>
       </nav>
       <section id="home" className="section hero">
+        <HeroParticles />
         <div className="home-info-col" style={{ textAlign: 'center' }}>
           <img src={personalInfo.profileImage} alt={personalInfo.name} className="profile-img" />
           <div className="name">{personalInfo.name}</div>
@@ -558,8 +650,13 @@ const Portfolio = () => {
         </div>
       </section>
       {/* About Section */}
+      <div className="canvas-3d-container" style={{ height: '360px', minHeight: '220px' }}>
+        <ErrorBoundary>
+          <ComputersCanvas />
+        </ErrorBoundary>
+      </div>
       <section id="about" className="section about">
-        <div className="about-container">
+        <div className="about-container" data-reveal>
           <h2 className="about-title">About Me</h2>
           <div className="about-grid">
             <div className={`about-image-col ${isVisible.about ? 'about-visible' : ''}`}>
@@ -612,40 +709,40 @@ const Portfolio = () => {
       </section>
       {/* Education Section */}
       <section id="education" className="section education">
-        <div className="education-container">
+        <div className="education-container" data-reveal>
           <h2 className="education-title">Education</h2>
-          <div className="education-list">
-            {education.map((edu, index) => (
+        <div className="education-list">
+          {education.map((edu, index) => (
               <div
-                key={edu.degree}
+              key={edu.degree}
                 className={`education-item ${isVisible.education ? 'education-visible' : ''}`}
-              >
+            >
                 <div className="education-grid">
                   <div className="education-info">
                     <div className="education-card">
-                      <div className="education-header">
-                        <GraduationCap className="education-icon" size={28} />
-                        <h3 className="education-degree">{edu.degree}</h3>
-                      </div>
-                      <p className="education-institution">{edu.institution}</p>
-                      <div className="education-meta">
-                        <span className="education-period">{edu.period}</span>
-                        <span className="education-results">{edu.Results}</span>
-                      </div>
-                      <p className="education-desc">{edu.description}</p>
-                      <div className="education-coursework">
-                        <h4 className="education-coursework-title">Key Coursework:</h4>
-                        <div className="education-coursework-list">
-                          {edu.coursework.map((course) => (
+              <div className="education-header">
+                <GraduationCap className="education-icon" size={28} />
+                <h3 className="education-degree">{edu.degree}</h3>
+              </div>
+              <p className="education-institution">{edu.institution}</p>
+              <div className="education-meta">
+                <span className="education-period">{edu.period}</span>
+                <span className="education-results">{edu.Results}</span>
+              </div>
+              <p className="education-desc">{edu.description}</p>
+              <div className="education-coursework">
+                <h4 className="education-coursework-title">Key Coursework:</h4>
+                <div className="education-coursework-list">
+                  {edu.coursework.map((course) => (
                             <span
                               key={course}
                               className="education-course"
                             >
                               {course}
                             </span>
-                          ))}
-                        </div>
-                      </div>
+                  ))}
+                </div>
+              </div>
                     </div>
                   </div>
                   <div className="education-image-col">
@@ -671,90 +768,77 @@ const Portfolio = () => {
       </section>
       {/* Skills Section */}
       <section id="skills" className="section skills">
-        <div className="skills-container">
+        <div className="skills-container" data-reveal>
           <h2 className="skills-title">Skills & Technologies</h2>
-          <div className="skills-grid">
-            {skillCategories.map((category, catIdx) => (
-              <div key={category.name} className={`skills-category${isVisible.skills ? ' skills-visible' : ''}`}>
-                <div className="skills-card">
-                  <div className="skills-header">
-                    <div className="skills-icon">{category.icon}</div>
-                    <h3 className="skills-category-title">{category.name}</h3>
-                  </div>
-                  <div className="skills-list">
-                    {category.skills.map((skill) => (
-                      <div key={skill.name} className="skills-skill">
-                        <div className="skills-skill-row">
-                          <div className="skills-skill-info">
-                            <span className="skills-skill-icon">{skill.icon}</span>
-                            <span className="skills-skill-name">{skill.name}</span>
-                          </div>
-                          <span className="skills-skill-level">{skill.level}%</span>
-                        </div>
-                        <div className="skills-bar-bg">
-                          <div
-                            className="skills-bar"
-                            style={{ width: isVisible.skills ? `${skill.level}%` : '0%' }}
-                          ></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+          <div className="skills-badge-groups">
+            {skillBadgeGroups.map((group) => (
+              <div key={group.name} className={`skills-badge-group${isVisible.skills ? ' skills-visible' : ''}`}>
+                <div className="skills-badge-header">
+                  <div className="skills-icon"><BarChart3 size={20} /></div>
+                  <h3 className="skills-badge-title">{group.name}</h3>
                 </div>
-              </div>
-            ))}
-          </div>
+                <div className="skills-badges">
+                  {group.items.map((item) => (
+                    <span key={item.label} className="skills-badge skills-badge-with-icon">
+                      <img src={item.icon} alt={item.label} className="skills-badge-img" />
+                      <span>{item.label}</span>
+                    </span>
+                  ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
         </div>
       </section>
       {/* Achievements Section */}
       <section id="achievements" className="section achievements">
-        <div className="achievements-container">
+        <div className="achievements-container" data-reveal>
           <h2 className="achievements-title">Achievements & Recognition</h2>
-          <div className="achievements-grid">
-            {achievements.map((achievement, index) => (
+        <div className="achievements-grid">
+          {achievements.map((achievement, index) => (
               <div
-                key={achievement.title}
+              key={achievement.title}
                 className={`achievements-item${isVisible.achievements ? ' achievements-visible' : ''}`}
-              >
+            >
                 <div className="achievements-card">
-                  <div className="achievements-header">
-                    <div className="achievements-icon">{achievement.icon}</div>
-                    <div className="achievements-info">
-                      <div className="achievements-title-row">
-                        <h3 className="achievements-item-title">{achievement.title}</h3>
-                        <span className="achievements-year">{achievement.year}</span>
-                      </div>
-                      <p className="achievements-desc">{achievement.description}</p>
-                    </div>
+              <div className="achievements-header">
+                <div className="achievements-icon">{achievement.icon}</div>
+                <div className="achievements-info">
+                  <div className="achievements-title-row">
+                    <h3 className="achievements-item-title">{achievement.title}</h3>
+                    <span className="achievements-year">{achievement.year}</span>
                   </div>
+                  <p className="achievements-desc">{achievement.description}</p>
                 </div>
               </div>
-            ))}
+                  </div>
+                </div>
+          ))}
           </div>
         </div>
       </section>
       {/* Certifications Section */}
       <section id="certifications" className="section certifications">
-        <div className="certifications-container">
+        <div className="certifications-container" data-reveal>
           <h2 className="certifications-title">Certifications</h2>
-          <div className="certifications-grid">
-            {certifications.map((cert, index) => (
+        <div className="certifications-grid">
+          {certifications.map((cert, index) => (
               <div
-                key={cert.title}
+              key={cert.title}
                 className={`certifications-item${isVisible.certifications ? ' certifications-visible' : ''}`}
-              >
+            >
                 <div className="certifications-card">
-                  <div className="certifications-header">
-                    <div className="certifications-icon">{cert.icon}</div>
-                    <div className="certifications-info">
-                      <div className="certifications-title-row">
-                        <h3 className="certifications-item-title">{cert.title}</h3>
-                        <span className="certifications-year">{cert.year}</span>
-                      </div>
-                      <p className="certifications-issuer">{cert.issuer}</p>
-                      <p className="certifications-id">Credential ID: {cert.credentialId}</p>
-                    </div>
+              <div className="certifications-header">
+                <div className="certifications-icon">{cert.icon}</div>
+                <div className="certifications-info">
+                  <div className="certifications-title-row">
+                    <h3 className="certifications-item-title">{cert.title}</h3>
+                    <span className="certifications-year">{cert.year}</span>
                   </div>
+                  <p className="certifications-issuer">{cert.issuer}</p>
+                  <p className="certifications-id">Credential ID: {cert.credentialId}</p>
+                </div>
+              </div>
                 </div>
               </div>
             ))}
@@ -763,7 +847,7 @@ const Portfolio = () => {
       </section>
       {/* Projects Section */}
       <section id="projects" className="section projects">
-        <div className="projects-container">
+        <div className="projects-container" data-reveal>
           <h2 className="projects-title">Featured Projects</h2>
           <div className="projects-grid">
             {projects.map((project, index) => (
@@ -827,50 +911,50 @@ const Portfolio = () => {
       </section>
       {/* Contact Section */}
       <section id="contact" className="section contact">
-        <div className="contact-container">
+        <div className="contact-container" data-reveal>
           <h2 className="contact-title">Let's Connect & Collaborate</h2>
           <p className="contact-subtitle">
             Computer Engineering Student at University of Jaffna
           </p>
-          <p className="contact-desc">
-            Interested in collaborating on innovative projects? Let's connect and create impactful solutions together!
-          </p>
-          <div className="contact-links">
+        <p className="contact-desc">
+          Interested in collaborating on innovative projects? Let's connect and create impactful solutions together!
+        </p>
+        <div className="contact-links">
             <a
               href={`mailto:${personalInfo.email}`}
               className="contact-link"
             >
-              <Mail size={40} className="contact-link-icon" />
-              <h3 className="contact-link-title">Email</h3>
-              <p className="contact-link-desc">{personalInfo.email}</p>
-            </a>
+            <Mail size={40} className="contact-link-icon" />
+            <h3 className="contact-link-title">Email</h3>
+            <p className="contact-link-desc">{personalInfo.email}</p>
+          </a>
             <a
               href={personalInfo.linkedin}
               className="contact-link"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Linkedin size={40} className="contact-link-icon" />
-              <h3 className="contact-link-title">LinkedIn</h3>
-              <p className="contact-link-desc">Connect with me</p>
-            </a>
+            <Linkedin size={40} className="contact-link-icon" />
+            <h3 className="contact-link-title">LinkedIn</h3>
+            <p className="contact-link-desc">Connect with me</p>
+          </a>
             <a
               href={personalInfo.github}
               className="contact-link"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Github size={40} className="contact-link-icon" />
-              <h3 className="contact-link-title">GitHub</h3>
-              <p className="contact-link-desc">View my projects</p>
-            </a>
-          </div>
+            <Github size={40} className="contact-link-icon" />
+            <h3 className="contact-link-title">GitHub</h3>
+            <p className="contact-link-desc">View my projects</p>
+          </a>
+        </div>
           <a 
             href={`mailto:${personalInfo.email}`}
             className="contact-btn"
           >
-            Start a Conversation
-          </a>
+          Start a Conversation
+        </a>
         </div>
       </section>
       {/* Footer */}

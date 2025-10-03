@@ -10,14 +10,20 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.6",
+    "@react-three/fiber": "^9.3.0",
+    "framer-motion": "^12.23.22",
     "gh-pages": "^6.3.0",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-parallax-tilt": "^1.6.48",
+    "react-tsparticles": "^2.11.1",
+    "three": "^0.180.0",
+    "tsparticles": "^2.11.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
