@@ -1,36 +1,9 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe, Award, BookOpen, GraduationCap, Terminal, Braces, BarChart3, Network, MapPin, Calendar, Eye, Star } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe, Award, BookOpen, GraduationCap, MapPin, BarChart3 } from 'lucide-react';
 import './Portfolio.css';
 import aboutImg from './376728350_1292994751351301_1136127884073783092_n.png';
-import video from '../../public/202507010006.mp4';
-import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
 import ComputersCanvas from './ComputersCanvas.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
-
-const HeroParticles = () => {
-  const particlesInit = async (main) => {
-    await loadFull(main);
-  };
-  return (
-    <Particles
-      id="tsparticles"
-      init={particlesInit}
-      options={{
-        background: { color: 'transparent' },
-        fpsLimit: 60,
-        particles: {
-          number: { value: 70 },
-          move: { enable: true, speed: 1 },
-          opacity: { value: 0.3 },
-          size: { value: { min: 1, max: 3 } },
-          links: { enable: true, color: '#888', opacity: 0.4 },
-        },
-        detectRetina: true,
-      }}
-    />
-  );
-};
 
 // Intersection Observer to toggle section-visible
 function useSectionReveal() {
@@ -50,37 +23,11 @@ function useSectionReveal() {
 }
 
 const Portfolio = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isVisible, setIsVisible] = useState({});
-  const [showSplash, setShowSplash] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
   const [selectedProject, setSelectedProject] = useState(null);
-
-  // --- Video Splash State ---
-  const [showVideo, setShowVideo] = useState(true);
-  const [videoPlaying, setVideoPlaying] = useState(false);
-  const videoRef = useRef(null);
-
-  // Handle video end
-  const handleVideoEnd = () => {
-    setShowVideo(false);
-    setShowSplash(true);
-  };
-
-  // Handle skip button
-  const handleSkip = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-    setShowVideo(false);
-    setShowSplash(true);
-  };
-
-  // Handle play button
-  const handlePlay = () => {
-    setVideoPlaying(true);
-    videoRef.current.play();
-  };
+  const [splashFade, setSplashFade] = useState(false);
 
   // Intersection Observer for scroll animations
   useEffect(() => {
@@ -104,7 +51,6 @@ const Portfolio = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
-        setIsMenuOpen(false);
         setSelectedProject(null);
       }
     };
@@ -116,11 +62,8 @@ const Portfolio = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setIsMenuOpen(false);
     }
   }, []);
-
-  const [splashFade, setSplashFade] = useState(false);
 
   const handleSplashEnd = useCallback(() => {
     setSplashFade(true);
@@ -395,9 +338,7 @@ const Portfolio = () => {
       github: 'https://github.com/ThilinaMadhushanka/CLUSTERING_ALGORITHMS',
       live: '#',
       status: 'Completed'
-    }
-  ,
-    // New projects added per user request
+    },
     {
       id: 15,
       title: 'Mobile Water Delivery & Hostel Services',
@@ -411,7 +352,7 @@ const Portfolio = () => {
     },
     {
       id: 16,
-      title: 'Full‑stack CRUD app (MERN)',
+      title: 'Full stack CRUD app (MERN)',
       description: 'Responsive MERN application with full CRUD for product management, client-side state handling, and robust UI/UX built with Chakra UI.',
       fullDescription: 'Built a full-stack MERN application with React + Chakra UI on the frontend and Node/Express + MongoDB on the backend. Implemented product CRUD operations, client state using Zustand, form validation, and toast notifications for a smooth UX.',
       tech: ['React', 'Chakra UI', 'Node.js', 'Express', 'MongoDB', 'Zustand'],
@@ -508,9 +449,8 @@ const Portfolio = () => {
 
   useSectionReveal();
 
-  // --- Splash Screen ---
+  // Splash Screen Component
   const SplashScreen = () => (
-    
     <div className={`splash-screen${splashFade ? ' fade-out' : ''}`}>
       <div className="splash-content">
         <div className="splash-img">
@@ -525,15 +465,13 @@ const Portfolio = () => {
         <div className="splash-bar">
           <div className="splash-bar-inner"></div>
         </div>
-        <button
-          onClick={handleSplashEnd}
-          className="splash-btn"
-        >
+        <button onClick={handleSplashEnd} className="splash-btn">
           Enter Portfolio
         </button>
       </div>
     </div>
   );
+
   // Project Modal Component
   const ProjectModal = ({ project, onClose }) => (
     <div className="modal-overlay">
@@ -545,38 +483,24 @@ const Portfolio = () => {
               <span className={`modal-status-badge ${project.status}`}>
                 {project.status}
               </span>
-              <span className="modal-category">{project.category}</span>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="modal-close"
-          >
+          <button onClick={onClose} className="modal-close">
             <X size={24} />
           </button>
         </div>
-        <img
-          src={project.image}
-          alt={project.title}
-          className="modal-img"
-        />
-        <p className="modal-desc">
-          {project.fullDescription}
-        </p>
+        <img src={project.image} alt={project.title} className="modal-img" />
+        <p className="modal-desc">{project.fullDescription}</p>
         <div className="modal-tech-list">
           {project.tech.map((tech) => (
-            <span
-              key={tech}
-              className="modal-tech"
-            >
-              {tech}
-            </span>
+            <span key={tech} className="modal-tech">{tech}</span>
           ))}
         </div>
         <div className="modal-links">
           <a
             href={project.github}
             className="modal-link-code"
+            onClick={(e) => e.stopPropagation()}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -587,6 +511,7 @@ const Portfolio = () => {
             <a
               href={project.live}
               className="modal-link-live"
+              onClick={(e) => e.stopPropagation()}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -619,8 +544,8 @@ const Portfolio = () => {
           ))}
         </div>
       </nav>
+
       <section id="home" className="section hero">
-        <HeroParticles />
         <div className="home-info-col" style={{ textAlign: 'center' }}>
           <img src={personalInfo.profileImage} alt={personalInfo.name} className="profile-img" />
           <div className="name">{personalInfo.name}</div>
@@ -638,34 +563,22 @@ const Portfolio = () => {
             <button className="primary" onClick={() => scrollToSection('projects')}>Explore My Work</button>
             <button className="secondary" onClick={() => scrollToSection('contact')}>Get In Touch</button>
           </div>
-          {/* Video at the bottom */}
-          <div className="home-video-col" style={{ marginTop: '2rem' }}>
-            <video
-              width="100%"
-              style={{ maxWidth: 400, borderRadius: 16, boxShadow: '0 8px 32px #a78bfa55' }}
-              src={video}
-              controls
-            />
-          </div>
         </div>
       </section>
-      {/* About Section */}
+
       <div className="canvas-3d-container" style={{ height: '360px', minHeight: '220px' }}>
         <ErrorBoundary>
           <ComputersCanvas />
         </ErrorBoundary>
       </div>
+
       <section id="about" className="section about">
         <div className="about-container" data-reveal>
           <h2 className="about-title">About Me</h2>
           <div className="about-grid">
             <div className={`about-image-col ${isVisible.about ? 'about-visible' : ''}`}>
               <div className="about-image-wrapper">
-                <img 
-                  src={aboutImg}
-                  alt={personalInfo.name}
-                  className="about-image"
-                />
+                <img src={aboutImg} alt={personalInfo.name} className="about-image" />
                 <div className="about-location-icon">
                   <MapPin size={24} className="about-location-icon-svg" />
                 </div>
@@ -684,21 +597,11 @@ const Portfolio = () => {
                 <span>{personalInfo.location}</span>
               </div>
               <div className="about-links">
-                <a
-                  href={personalInfo.github}
-                  className="about-link github"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={personalInfo.github} className="about-link github" target="_blank" rel="noopener noreferrer">
                   <Github size={20} />
                   GitHub
                 </a>
-                <a
-                  href={personalInfo.linkedin}
-                  className="about-link linkedin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={personalInfo.linkedin} className="about-link linkedin" target="_blank" rel="noopener noreferrer">
                   <Linkedin size={20} />
                   LinkedIn
                 </a>
@@ -707,42 +610,34 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
-      {/* Education Section */}
+
       <section id="education" className="section education">
         <div className="education-container" data-reveal>
           <h2 className="education-title">Education</h2>
-        <div className="education-list">
-          {education.map((edu, index) => (
-              <div
-              key={edu.degree}
-                className={`education-item ${isVisible.education ? 'education-visible' : ''}`}
-            >
+          <div className="education-list">
+            {education.map((edu) => (
+              <div key={edu.degree} className={`education-item ${isVisible.education ? 'education-visible' : ''}`}>
                 <div className="education-grid">
                   <div className="education-info">
                     <div className="education-card">
-              <div className="education-header">
-                <GraduationCap className="education-icon" size={28} />
-                <h3 className="education-degree">{edu.degree}</h3>
-              </div>
-              <p className="education-institution">{edu.institution}</p>
-              <div className="education-meta">
-                <span className="education-period">{edu.period}</span>
-                <span className="education-results">{edu.Results}</span>
-              </div>
-              <p className="education-desc">{edu.description}</p>
-              <div className="education-coursework">
-                <h4 className="education-coursework-title">Key Coursework:</h4>
-                <div className="education-coursework-list">
-                  {edu.coursework.map((course) => (
-                            <span
-                              key={course}
-                              className="education-course"
-                            >
-                              {course}
-                            </span>
-                  ))}
-                </div>
-              </div>
+                      <div className="education-header">
+                        <GraduationCap className="education-icon" size={28} />
+                        <h3 className="education-degree">{edu.degree}</h3>
+                      </div>
+                      <p className="education-institution">{edu.institution}</p>
+                      <div className="education-meta">
+                        <span className="education-period">{edu.period}</span>
+                        <span className="education-results">{edu.Results}</span>
+                      </div>
+                      <p className="education-desc">{edu.description}</p>
+                      <div className="education-coursework">
+                        <h4 className="education-coursework-title">Key Coursework:</h4>
+                        <div className="education-coursework-list">
+                          {edu.coursework.map((course) => (
+                            <span key={course} className="education-course">{course}</span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="education-image-col">
@@ -752,11 +647,7 @@ const Portfolio = () => {
                       </div>
                     ) : (
                       <div className="education-image-wrapper">
-                        <img 
-                          src={edu.image} 
-                          alt={edu.institution}
-                          className="education-image"
-                        />
+                        <img src={edu.image} alt={edu.institution} className="education-image" />
                       </div>
                     )}
                   </div>
@@ -766,7 +657,7 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
-      {/* Skills Section */}
+
       <section id="skills" className="section skills">
         <div className="skills-container" data-reveal>
           <h2 className="skills-title">Skills & Technologies</h2>
@@ -784,73 +675,67 @@ const Portfolio = () => {
                       <span>{item.label}</span>
                     </span>
                   ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-        </div>
-      </section>
-      {/* Achievements Section */}
-      <section id="achievements" className="section achievements">
-        <div className="achievements-container" data-reveal>
-          <h2 className="achievements-title">Achievements & Recognition</h2>
-        <div className="achievements-grid">
-          {achievements.map((achievement, index) => (
-              <div
-              key={achievement.title}
-                className={`achievements-item${isVisible.achievements ? ' achievements-visible' : ''}`}
-            >
-                <div className="achievements-card">
-              <div className="achievements-header">
-                <div className="achievements-icon">{achievement.icon}</div>
-                <div className="achievements-info">
-                  <div className="achievements-title-row">
-                    <h3 className="achievements-item-title">{achievement.title}</h3>
-                    <span className="achievements-year">{achievement.year}</span>
-                  </div>
-                  <p className="achievements-desc">{achievement.description}</p>
-                </div>
-              </div>
-                  </div>
-                </div>
-          ))}
-          </div>
-        </div>
-      </section>
-      {/* Certifications Section */}
-      <section id="certifications" className="section certifications">
-        <div className="certifications-container" data-reveal>
-          <h2 className="certifications-title">Certifications</h2>
-        <div className="certifications-grid">
-          {certifications.map((cert, index) => (
-              <div
-              key={cert.title}
-                className={`certifications-item${isVisible.certifications ? ' certifications-visible' : ''}`}
-            >
-                <div className="certifications-card">
-              <div className="certifications-header">
-                <div className="certifications-icon">{cert.icon}</div>
-                <div className="certifications-info">
-                  <div className="certifications-title-row">
-                    <h3 className="certifications-item-title">{cert.title}</h3>
-                    <span className="certifications-year">{cert.year}</span>
-                  </div>
-                  <p className="certifications-issuer">{cert.issuer}</p>
-                  <p className="certifications-id">Credential ID: {cert.credentialId}</p>
-                </div>
-              </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-      {/* Projects Section */}
+
+      <section id="achievements" className="section achievements">
+        <div className="achievements-container" data-reveal>
+          <h2 className="achievements-title">Achievements & Recognition</h2>
+          <div className="achievements-grid">
+            {achievements.map((achievement) => (
+              <div key={achievement.title} className={`achievements-item${isVisible.achievements ? ' achievements-visible' : ''}`}>
+                <div className="achievements-card">
+                  <div className="achievements-header">
+                    <div className="achievements-icon">{achievement.icon}</div>
+                    <div className="achievements-info">
+                      <div className="achievements-title-row">
+                        <h3 className="achievements-item-title">{achievement.title}</h3>
+                        <span className="achievements-year">{achievement.year}</span>
+                      </div>
+                      <p className="achievements-desc">{achievement.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="certifications" className="section certifications">
+        <div className="certifications-container" data-reveal>
+          <h2 className="certifications-title">Certifications</h2>
+          <div className="certifications-grid">
+            {certifications.map((cert) => (
+              <div key={cert.title} className={`certifications-item${isVisible.certifications ? ' certifications-visible' : ''}`}>
+                <div className="certifications-card">
+                  <div className="certifications-header">
+                    <div className="certifications-icon">{cert.icon}</div>
+                    <div className="certifications-info">
+                      <div className="certifications-title-row">
+                        <h3 className="certifications-item-title">{cert.title}</h3>
+                        <span className="certifications-year">{cert.year}</span>
+                      </div>
+                      <p className="certifications-issuer">{cert.issuer}</p>
+                      <p className="certifications-id">Credential ID: {cert.credentialId}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="projects" className="section projects">
         <div className="projects-container" data-reveal>
           <h2 className="projects-title">Featured Projects</h2>
           <div className="projects-grid">
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <div
                 key={project.id}
                 className={`projects-item${isVisible.projects ? ' projects-visible' : ''}`}
@@ -858,11 +743,7 @@ const Portfolio = () => {
               >
                 <div className="projects-card">
                   <div className="projects-img-wrapper">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="projects-img"
-                    />
+                    <img src={project.image} alt={project.title} className="projects-img" />
                     <div className="projects-img-overlay"></div>
                   </div>
                   <div className="projects-content">
@@ -870,12 +751,7 @@ const Portfolio = () => {
                     <p className="projects-desc">{project.description}</p>
                     <div className="projects-tech-list">
                       {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="projects-tech"
-                        >
-                          {tech}
-                        </span>
+                        <span key={tech} className="projects-tech">{tech}</span>
                       ))}
                     </div>
                     <div className="projects-links">
@@ -909,71 +785,49 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
-      {/* Contact Section */}
+
       <section id="contact" className="section contact">
         <div className="contact-container" data-reveal>
           <h2 className="contact-title">Let's Connect & Collaborate</h2>
-          <p className="contact-subtitle">
-            Computer Engineering Student at University of Jaffna
+          <p className="contact-subtitle">Computer Engineering Student at University of Jaffna</p>
+          <p className="contact-desc">
+            Interested in collaborating on innovative projects? Let's connect and create impactful solutions together!
           </p>
-        <p className="contact-desc">
-          Interested in collaborating on innovative projects? Let's connect and create impactful solutions together!
-        </p>
-        <div className="contact-links">
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="contact-link"
-            >
-            <Mail size={40} className="contact-link-icon" />
-            <h3 className="contact-link-title">Email</h3>
-            <p className="contact-link-desc">{personalInfo.email}</p>
+          <div className="contact-links">
+            <a href={`mailto:${personalInfo.email}`} className="contact-link">
+              <Mail size={40} className="contact-link-icon" />
+              <h3 className="contact-link-title">Email</h3>
+              <p className="contact-link-desc">{personalInfo.email}</p>
+            </a>
+            <a href={personalInfo.linkedin} className="contact-link" target="_blank" rel="noopener noreferrer">
+              <Linkedin size={40} className="contact-link-icon" />
+              <h3 className="contact-link-title">LinkedIn</h3>
+              <p className="contact-link-desc">Connect with me</p>
+            </a>
+            <a href={personalInfo.github} className="contact-link" target="_blank" rel="noopener noreferrer">
+              <Github size={40} className="contact-link-icon" />
+              <h3 className="contact-link-title">GitHub</h3>
+              <p className="contact-link-desc">View my projects</p>
+            </a>
+          </div>
+          <a href={`mailto:${personalInfo.email}`} className="contact-btn">
+            Start a Conversation
           </a>
-            <a
-              href={personalInfo.linkedin}
-              className="contact-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-            <Linkedin size={40} className="contact-link-icon" />
-            <h3 className="contact-link-title">LinkedIn</h3>
-            <p className="contact-link-desc">Connect with me</p>
-          </a>
-            <a
-              href={personalInfo.github}
-              className="contact-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-            <Github size={40} className="contact-link-icon" />
-            <h3 className="contact-link-title">GitHub</h3>
-            <p className="contact-link-desc">View my projects</p>
-          </a>
-        </div>
-          <a 
-            href={`mailto:${personalInfo.email}`}
-            className="contact-btn"
-          >
-          Start a Conversation
-        </a>
         </div>
       </section>
-      {/* Footer */}
+
       <footer className="footer">
         <div className="footer-container">
-          <p className="footer-text">
-            © 2025 Thilina Madhushanka. Built with React and ❤️
-          </p>
+          <p className="footer-text">© 2025 Thilina Madhushanka. Built with React and ❤️</p>
         </div>
       </footer>
-      {/* Project Modal */}
+
       {selectedProject && (
-        <ProjectModal 
-          project={selectedProject} 
-          onClose={() => setSelectedProject(null)} 
-        />
+        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       )}
     </div>
   );
 };
 
-export default Portfolio;
+export default Portfolio
+
