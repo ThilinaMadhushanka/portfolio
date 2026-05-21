@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe, Award, BookOpen, GraduationCap, MapPin, BarChart3 } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe, Award, BookOpen, GraduationCap, MapPin, BarChart3, Briefcase } from 'lucide-react';
 import './Portfolio.css';
 import aboutImg from './376728350_1292994751351301_1136127884073783092_n.png';
-import ComputersCanvas from './ComputersCanvas.jsx';
+//import ComputersCanvas from './ComputersCanvas.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 
 // Intersection Observer to toggle section-visible
@@ -94,7 +94,7 @@ const Portfolio = () => {
 
   const stats = useMemo(() => [
     { label: "Projects Completed", value: "20+" },
-    { label: "Years Experience", value: "0+" },
+    { label: "Years Experience", value: "1+" },
     { label: "GitHub Stars", value: "50+" },
     { label: "Profile Views", value: "100+" }
   ], []);
@@ -135,33 +135,46 @@ const Portfolio = () => {
         { label: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
         { label: 'SQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
         { label: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-        { label: 'Go', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' },
-        { label: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
-        { label: 'MATLAB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg' },
-        { label: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+        { label: 'Golang', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' },
+        { label: 'CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
       ]
     },
     {
       name: 'Frameworks & Libraries',
       items: [
-        { label: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
-        { label: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+        { label: 'React.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
         { label: 'Express.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+        { label: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
         { label: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
         { label: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg' },
-        { label: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg' },
-        { label: 'Streamlit', icon: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/streamlit.svg' },
+        { label: 'Material UI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
+        { label: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+        { label: 'Gin', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' },
+      ]
+    },
+    {
+      name: 'DevOps & Cloud',
+      items: [
+        { label: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+        { label: 'Kubernetes', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
+        { label: 'Jenkins', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg' },
+        { label: 'Terraform', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg' },
+        { label: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
+        { label: 'GCP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg' },
+        { label: 'Nginx', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg' },
+        { label: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
       ]
     },
     {
       name: 'Developer Tools',
       items: [
         { label: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-        { label: 'MATLAB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg' },
         { label: 'VS Code', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
         { label: 'Cursor', icon: 'https://raw.githubusercontent.com/cursor-ventures/brand/main/logo.svg' },
         { label: 'Postman', icon: 'https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg' },
-        { label: 'IntelliJ', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg' },
+        { label: 'IntelliJ IDEA', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg' },
+        { label: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
+        { label: 'Jira', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg' },
       ]
     },
     {
@@ -173,18 +186,85 @@ const Portfolio = () => {
       ]
     },
     {
-      name: 'Other',
+      name: 'Concepts',
       items: [
-        { label: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
-        { label: 'Jira', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg' },
-        { label: 'DSA', icon: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/leetcode.svg' },
         { label: 'OOP', icon: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/java.svg' },
+        { label: 'DSA', icon: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/leetcode.svg' },
         { label: 'REST APIs', icon: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/openapi.svg' },
+        { label: 'CI/CD', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+        { label: 'IaC', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg' },
+        { label: 'Microservices', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
       ]
     }
   ]), []);
 
   const projects = useMemo(() => [
+    {
+      id: 101,
+      title: 'PE Stock Management & ERP System',
+      description: 'Full ERP and stock management system with POS, purchasing, inventory tracking, and financial modules.',
+      fullDescription: 'Developed a full ERP and stock management system with POS, purchasing, inventory tracking, and financial modules. Implemented barcode generation, stock transfer management, customer credit control, and cheque management workflows. Created interactive dashboards and business analytics using .NET Charting libraries. Designed advanced Crystal Reports for invoices, financial summaries, and inventory analysis.',
+      tech: ['VB.NET', 'MySQL', 'Crystal Reports'],
+      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&h=300&fit=crop',
+      github: 'https://github.com/Code-Ai-Sys/PE_Stock_Management',
+      live: '#',
+      status: 'Completed'
+    },
+    {
+      id: 102,
+      title: 'Full-Stack Restaurant Management & ERP System',
+      description: 'Scalable RESTful API based restaurant management system with POS, KOT, billing, inventory, and supplier management modules.',
+      fullDescription: 'Built scalable RESTful APIs using Go (Gin Framework) with JWT authentication and RBAC authorization. Developed POS, Kitchen Order Ticket (KOT), billing, inventory, and supplier management modules. Integrated Chart.js dashboards, Swagger API documentation, and structured logging using Uber-Zap. Created responsive frontend interfaces using React 19 and Vite.',
+      tech: ['React', 'Vite', 'Go', 'Gin', 'PostgreSQL', 'JWT'],
+      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&h=300&fit=crop',
+      github: 'https://github.com/PabasaraDilshan/rms-v1.1-go-be',
+      live: '#',
+      status: 'Completed'
+    },
+    {
+      id: 103,
+      title: 'Containerized MERN Authentication System',
+      description: 'Complete MERN stack authentication system with JWT-based login and registration, containerized using Docker.',
+      fullDescription: 'Developed a complete MERN stack authentication system with JWT-based login and registration. Containerized frontend, backend, and database services using Docker and Docker Compose. Implemented secure password hashing and environment-based configuration management.',
+      tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Docker'],
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&h=300&fit=crop',
+      github: 'https://github.com/ThilinaMadhushanka/Docker',
+      live: '#',
+      status: 'Completed'
+    },
+    {
+      id: 104,
+      title: 'Task Management System with DevOps Integration',
+      description: 'Production-ready full-stack application using React frontend and Go backend APIs with Nginx as a reverse proxy.',
+      fullDescription: 'Built a production-ready full-stack application using React frontend and Go backend APIs. Configured Nginx as a reverse proxy for frontend hosting and API routing. Implemented CRUD operations, PostgreSQL integration, and secure backend architecture.',
+      tech: ['React', 'Go', 'PostgreSQL', 'Nginx'],
+      image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=500&h=300&fit=crop',
+      github: 'https://github.com/ThilinaMadhushanka/nginx',
+      live: '#',
+      status: 'Completed'
+    },
+    {
+      id: 105,
+      title: 'Full-Stack DevOps Roadmap Application',
+      description: 'CI/CD pipelines using GitHub Actions and Jenkins for automated testing and deployments with Kubernetes orchestration.',
+      fullDescription: 'Implemented CI/CD pipelines using GitHub Actions and Jenkins for automated testing and deployments. Containerized multi-service applications using Docker and Docker Compose. Deployed and managed applications on AWS EC2 with Kubernetes orchestration. Designed scalable backend architecture with environment management and automated workflows.',
+      tech: ['Go', 'React', 'PostgreSQL', 'Docker', 'Jenkins', 'Kubernetes', 'AWS'],
+      image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=500&h=300&fit=crop',
+      github: 'https://github.com/ThilinaMadhushanka/devops',
+      live: '#',
+      status: 'Completed'
+    },
+    {
+      id: 106,
+      title: 'Automated Cloud Infrastructure Deployment via Terraform',
+      description: 'Designed and provisioned Google Cloud infrastructure securely and consistently using Terraform Infrastructure as Code (IaC).',
+      fullDescription: 'Designed and provisioned Google Cloud infrastructure securely and consistently using Terraform Infrastructure as Code (IaC). Developed reusable Terraform modules to deploy scalable serverless applications with clean and maintainable architecture. Automated deployment of Python containerized applications to Google Cloud Run environments. Integrated Docker with Google Artifact Registry to build, authenticate, and push container images automatically. Provisioned Google Cloud Storage (GCS) buckets and dynamically managed cloud resources through Terraform outputs.',
+      tech: ['Terraform', 'GCP', 'Docker', 'Cloud Run', 'Artifact Registry', 'GCS'],
+      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&h=300&fit=crop',
+      github: 'https://github.com/ThilinaMadhushanka/terraform_demo',
+      live: '#',
+      status: 'Completed'
+    },
     {
       id: 1,
       title: 'AI-Powered Travel Assistant',
@@ -376,6 +456,13 @@ const Portfolio = () => {
 
   const certifications = useMemo(() => [
     {
+      title: 'Introduction to Blockchain Technologies',
+      issuer: 'UOM',
+      year: '2024',
+      credentialId: 'N/A',
+      icon: <Briefcase size={24} />
+    },
+    {
       title: 'Python Programming',
       issuer: 'UOM',
       year: '2024',
@@ -397,7 +484,7 @@ const Portfolio = () => {
       icon: <Globe size={24} />
     },
     {
-      title: 'Wen Design for Beginners',
+      title: 'Web Design for Beginners',
       issuer: 'UOM',
       year: '2024',
       credentialId: 'uYZDfYMBNw',
@@ -409,7 +496,7 @@ const Portfolio = () => {
     {
       degree: 'Bachelor of Science in Computer Engineering',
       institution: 'Faculty Of Engineering, University of Jaffna',
-      period: '2022 - Present',
+      period: '2021 - Aug 2026',
       Results: '2.6/4.0',
       description: 'Specializing in Computer engineering, embedded systems and AI/ML applications. Active member of IEEE student branch.',
       coursework: ['Data Structures & Algorithms', 'Database Systems', 'Computer Networks', 'Embedded Systems', 'Machine Learning', 'Software Engineering'],
@@ -418,7 +505,7 @@ const Portfolio = () => {
     {
       degree: 'Advanced Level (A/L) - Physical Science',
       institution: 'Gankandhura Central College, Pelmadulla',
-      period: '2017 - 2020',
+      period: '2017 - 2019',
       Results: 'ABB',
       description: 'Focused on Mathematics, Physics and Chemistry with distinction in Mathematics.',
       coursework: ['Combined Mathematics', 'Physics', 'Chemistry'],
@@ -434,11 +521,22 @@ const Portfolio = () => {
     }
   ], []);
 
+  const experience = useMemo(() => [
+    {
+      role: 'Software Engineer Intern',
+      company: '4A Technologies (PVT) Ltd, Sri Lanka',
+      period: 'Nov 2025 - May 2026',
+      description: 'Contributed to enterprise-level ERP and stock management systems using VB.NET, MySQL, and Crystal Reports. Worked on Sales, Inventory, Purchasing, Customer Credit, and Financial Management modules. Developed reporting features including invoices, barcode labels, analytics dashboards, and financial summaries. Also contributed to the Full-Stack Restaurant Management & ERP System — built scalable RESTful APIs using Go (Gin Framework) with JWT authentication and RBAC authorization, developed POS, KOT, billing, inventory, and supplier management modules, integrated Chart.js dashboards and Swagger API documentation.',
+      tech: ['VB.NET', 'MySQL', 'Crystal Reports', 'Go', 'Gin', 'React', 'PostgreSQL', 'JWT', 'ERP Systems']
+    }
+  ], []);
+
   useEffect(() => {
     setIsVisible({
       home: true,
       about: true,
       education: true,
+      experience: true,
       skills: true,
       achievements: true,
       projects: true,
@@ -454,8 +552,8 @@ const Portfolio = () => {
     <div className={`splash-screen${splashFade ? ' fade-out' : ''}`}>
       <div className="splash-content">
         <div className="splash-img">
-          <img 
-            src={personalInfo.profileImage} 
+          <img
+            src={personalInfo.profileImage}
             alt={personalInfo.name}
             className="splash-profile"
           />
@@ -533,7 +631,7 @@ const Portfolio = () => {
       <nav className="navbar">
         <div className="brand">{personalInfo.name.split(' ')[0]}</div>
         <div className="menu">
-          {['home', 'about', 'education', 'skills', 'achievements', 'projects', 'contact'].map((item) => (
+          {['home', 'about', 'education', 'experience', 'skills', 'achievements', 'projects', 'contact'].map((item) => (
             <button
               key={item}
               onClick={() => scrollToSection(item)}
@@ -566,12 +664,6 @@ const Portfolio = () => {
         </div>
       </section>
 
-      <div className="canvas-3d-container" style={{ height: '360px', minHeight: '220px' }}>
-        <ErrorBoundary>
-          <ComputersCanvas />
-        </ErrorBoundary>
-      </div>
-
       <section id="about" className="section about">
         <div className="about-container" data-reveal>
           <h2 className="about-title">About Me</h2>
@@ -587,10 +679,10 @@ const Portfolio = () => {
             <div className={`about-text-col ${isVisible.about ? 'about-visible-delay' : ''}`}>
               <h3 className="about-hello">Hi, I'm Thilina!</h3>
               <p className="about-desc">
-                I'm a passionate full-stack developer and Computer Engineering undergraduate with a strong foundation in both software and hardware systems. With hands-on experience in building scalable, real-time and intelligent applications, I thrive on solving real-world problems through strategic thinking and efficient coding.
+                I'm a passionate Full-Stack Developer and Computer Engineering undergraduate with hands-on experience in building scalable web applications, cloud-native systems, and intelligent AI/ML solutions. I thrive on solving real-world problems through clean architecture, efficient code, and modern DevOps practices.
               </p>
               <p className="about-desc">
-                Whether it's crafting responsive UIs, engineering IoT systems or exploring AI-powered solutions, I love creating meaningful tech that drives positive change. Outside of coding, you'll often find me diving into emerging technologies, working on research-driven projects or contributing to the open-source community.
+                Whether it's engineering robust backend APIs, deploying containerized microservices on AWS and GCP, or building AI-powered applications with LangGraph and Hugging Face — I love creating impactful tech. Outside of coding, I'm constantly exploring emerging cloud technologies, contributing to open-source projects, and sharpening my competitive programming skills.
               </p>
               <div className="about-location">
                 <MapPin size={20} />
@@ -650,6 +742,46 @@ const Portfolio = () => {
                         <img src={edu.image} alt={edu.institution} className="education-image" />
                       </div>
                     )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" className="section education">
+        <div className="education-container" data-reveal>
+          <h2 className="education-title">Experience</h2>
+          <div className="education-list">
+            {experience.map((exp) => (
+              <div key={exp.role} className={`education-item ${isVisible.experience ? 'education-visible' : ''}`}>
+                <div className="education-grid">
+                  <div className="education-info">
+                    <div className="education-card">
+                      <div className="education-header">
+                        <Briefcase className="education-icon" size={28} />
+                        <h3 className="education-degree">{exp.role}</h3>
+                      </div>
+                      <p className="education-institution">{exp.company}</p>
+                      <div className="education-meta">
+                        <span className="education-period">{exp.period}</span>
+                      </div>
+                      <p className="education-desc">{exp.description}</p>
+                      <div className="education-coursework">
+                        <h4 className="education-coursework-title">Key Technologies:</h4>
+                        <div className="education-coursework-list">
+                          {exp.tech.map((tech) => (
+                            <span key={tech} className="education-course">{tech}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="education-image-col">
+                    <div className="education-placeholder">
+                      <Briefcase size={80} className="education-placeholder-icon" />
+                    </div>
                   </div>
                 </div>
               </div>
